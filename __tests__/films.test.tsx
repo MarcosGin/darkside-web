@@ -5,8 +5,8 @@ describe("Films", () => {
   it("renders a list of films", async () => {
     const result = renderWithClient(<Films />);
 
-    const cards = await result.findAllByText("View");
+    const cards = await result.findByText("A New Hope");
 
-    expect(cards.length).toBe(1);
+    expect(cards).toBeInTheDocument();
   });
 });

@@ -17,29 +17,20 @@ export const wrapper = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const handlers = [
-  rest.get("*/api/films", (req, res, ctx) => {
+  rest.get("*", (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
         data: [
           {
-            id: 9,
-            name: "Biggs Darklighter",
-            height: "183",
-            mass: "84",
-            hair_color: "black",
-            skin_color: "light",
-            eye_color: "brown",
-            birth_year: "24BBY",
-            gender: "male",
-            homeworld: "https://swapi.dev/api/planets/1/",
-            films: ["https://swapi.dev/api/films/1/"],
-            species: [],
-            vehicles: [],
-            starships: ["https://swapi.dev/api/starships/12/"],
-            created: "2014-12-10T15:59:50.509000Z",
-            edited: "2014-12-20T21:17:50.323000Z",
-            url: "https://swapi.dev/api/people/9/",
+            id: 1,
+            title: "A New Hope",
+            episode_id: 4,
+            opening_crawl:
+              "It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire's\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire's\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy....",
+            director: "George Lucas",
+            producer: "Gary Kurtz, Rick McCallum",
+            release_date: "1977-05-25",
           },
         ],
         totalPages: 1,
