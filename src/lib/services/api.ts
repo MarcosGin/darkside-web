@@ -17,7 +17,7 @@ export const ClientApi = axios.create({
 
 export const getFilms = async (page: number) => {
   return ClientApi.get<PaginationResponse<Film>>("/films", {
-    params: { page },
+    params: { page, limit: 12 },
   }).then((response) => response.data);
 };
 
@@ -29,7 +29,7 @@ export const getFilmById = async (id: string) => {
 
 export const getPeople = async (page: number) => {
   return ClientApi.get<PaginationResponse<People>>("/people", {
-    params: { page },
+    params: { page, limit: 12 },
   }).then((response) => response.data);
 };
 
@@ -41,7 +41,7 @@ export const getPeopleById = async (id: string) => {
 
 export const getPlanets = async (page: number) => {
   return ClientApi.get<PaginationResponse<Planet>>("/planets", {
-    params: { page },
+    params: { page, limit: 12 },
   }).then((response) => response.data);
 };
 
@@ -53,7 +53,7 @@ export const getPlanetById = async (id: string) => {
 
 export const getStarships = async (page: number) => {
   return ClientApi.get<PaginationResponse<Starship>>("/starships", {
-    params: { page },
+    params: { page, limit: 12 },
   }).then((response) => response.data);
 };
 

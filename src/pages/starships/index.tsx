@@ -1,14 +1,14 @@
 import { match } from "ts-pattern";
 import { useState } from "react";
 
-import { StarshipCard } from "@/components/cards/starship-card";
 import { useStarships } from "@/hooks/useStarships";
+import { StarshipCard } from "@/components/cards/starship-card";
 import { Loader } from "@/components/ui/loader";
+import { Pagination } from "@/components/ui/pagination";
 
 export default function Starships() {
-  const [page, setPage] = useState(1);
-
-  const starships = useStarships({ page });
+  const [currentPage, setCurrentPage] = useState(1);
+  const starships = useStarships({ page: currentPage });
 
   return (
     <section className="mt-10">
@@ -16,10 +16,18 @@ export default function Starships() {
 
       {match(starships)
         .with({ status: "loading" }, () => <Loader />)
-        .with({ status: "success" }, ({ data }) => (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-            {data?.map((item) => <StarshipCard {...item} key={item.id} />)}
-          </div>
+        .with({ status: "success" }, ({ data, totalPages }) => (
+          <>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+              {data?.map((item) => <StarshipCard {...item} key={item.id} />)}
+            </div>
+
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          </>
         ))
         .with({ status: "error" }, () => (
           <div className="flex items-center justify-center py-10">

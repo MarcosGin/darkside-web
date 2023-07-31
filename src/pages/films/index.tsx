@@ -4,11 +4,12 @@ import { useState } from "react";
 import { useFilms } from "@/hooks/useFilms";
 import { FilmCard } from "@/components/cards/film-card";
 import { Loader } from "@/components/ui/loader";
+import { Pagination } from "@/components/ui/pagination";
 
 export default function Films() {
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const films = useFilms({ page });
+  const films = useFilms({ page: currentPage });
 
   return (
     <section className="mt-10">
@@ -16,10 +17,17 @@ export default function Films() {
 
       {match(films)
         .with({ status: "loading" }, () => <Loader />)
-        .with({ status: "success" }, ({ data }) => (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-            {data?.map((item) => <FilmCard {...item} key={item.id} />)}
-          </div>
+        .with({ status: "success" }, ({ data, totalPages }) => (
+          <>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+              {data?.map((item) => <FilmCard {...item} key={item.id} />)}
+            </div>
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          </>
         ))
         .with({ status: "error" }, () => (
           <div className="flex items-center justify-center py-10">
