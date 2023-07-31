@@ -8,7 +8,6 @@ import { Pagination } from "@/components/ui/pagination";
 
 export default function Films() {
   const [currentPage, setCurrentPage] = useState(1);
-
   const films = useFilms({ page: currentPage });
 
   return (

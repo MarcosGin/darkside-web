@@ -18,8 +18,9 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
+import useMenuItems from "@/hooks/useMenuItems";
 
-const items = [
+const ITEMS = [
   {
     title: "Home",
     url: "/",
@@ -48,6 +49,7 @@ const items = [
 ];
 
 const Navbar: React.FC = () => {
+  const { items, currentItem } = useMenuItems(ITEMS);
   return (
     <div className="my-4 flex h-14 items-center justify-between ">
       <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
@@ -58,7 +60,10 @@ const Navbar: React.FC = () => {
           {items.map((item) => (
             <NavigationMenuItem key={item.url}>
               <Link href={item.url} legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink
+                  className={navigationMenuTriggerStyle()}
+                  active={currentItem?.url === item.url}
+                >
                   {item.title}
                 </NavigationMenuLink>
               </Link>

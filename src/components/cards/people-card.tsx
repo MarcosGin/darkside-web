@@ -1,4 +1,4 @@
-import { Calendar } from "lucide-react";
+import { Calendar, Heart, HeartHandshake, HeartOff } from "lucide-react";
 import Link from "next/link";
 
 import {
@@ -13,12 +13,17 @@ import { Button } from "@/components/ui/button";
 
 import { People } from "@/types";
 
-type PeopleCardProps = People;
+type PeopleCardProps = People & {
+  bookmarked: boolean;
+  onBookmark: (action: "add" | "remove") => void;
+};
 
 export const PeopleCard: React.FC<PeopleCardProps> = ({
   id,
   name,
   birth_year,
+  bookmarked,
+  onBookmark,
 }) => {
   return (
     <Card>
@@ -27,11 +32,23 @@ export const PeopleCard: React.FC<PeopleCardProps> = ({
         <CardDescription></CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-col space-y-2 text-sm md:flex-row md:justify-between md:space-y-0">
+        <div className="flex  flex-row justify-between space-y-0 text-sm">
           <div className="flex items-center">
             <Calendar />
             {birth_year}
           </div>
+
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => onBookmark(bookmarked ? "remove" : "add")}
+          >
+            {bookmarked ? (
+              <HeartOff className="h-4 w-4" />
+            ) : (
+              <Heart className="h-4 w-4" />
+            )}
+          </Button>
         </div>
       </CardContent>
       <CardFooter>

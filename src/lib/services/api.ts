@@ -33,6 +33,19 @@ export const getPeople = async (page: number) => {
   }).then((response) => response.data);
 };
 
+export const getPeopleBookmark = async ({
+  page,
+  ids,
+}: {
+  page: number;
+  ids: string;
+}) => {
+  return ClientApi.get<PaginationResponse<People>>("/people/bookmark/filter", {
+    params: { page, limit: 12, ids },
+  }).then((response) => response.data);
+};
+
+
 export const getPeopleById = async (id: string) => {
   return ClientApi.get<PeoplePopulated>(`/people/${id}`, {
     params: { populate: "homeworld,films,starships" },
