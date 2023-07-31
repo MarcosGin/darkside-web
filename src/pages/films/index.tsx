@@ -1,11 +1,14 @@
 import { match } from "ts-pattern";
+import { useState } from "react";
 
 import { useFilms } from "@/hooks/useFilms";
 import { FilmCard } from "@/components/cards/film-card";
 import { Loader } from "@/components/ui/loader";
 
 export default function Films() {
-  const films = useFilms();
+  const [page, setPage] = useState(1);
+
+  const films = useFilms({ page });
 
   return (
     <section className="mt-10">

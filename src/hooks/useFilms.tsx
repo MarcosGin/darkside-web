@@ -1,17 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { getFilms } from "@/lib/services/api";
-import { Film } from "@/types";
+import { Film, PaginationResponse } from "@/types";
 
-export function useFilms() {
-  const { data, status } = useQuery<Film[]>(["films", {}], () => getFilms(), {
-    retry: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-  });
+export function useFilms({ page }: { page: number }) {
+  const { data, status } = useQuery<PaginationResponse<Film>>(
+    ["films", { page }],
+    () => getFilms(page),
+    {
+      retry: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    },
+  );
 
   return {
-    data,
+    ...(data ?? {}),
     status,
   };
 }

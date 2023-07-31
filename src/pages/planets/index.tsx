@@ -1,11 +1,14 @@
 import { match } from "ts-pattern";
+import { useState } from "react";
 
 import { PlanetCard } from "@/components/cards/planet-card";
 import { usePlanets } from "@/hooks/usePlanets";
 import { Loader } from "@/components/ui/loader";
 
 export default function Planets() {
-  const planets = usePlanets();
+  const [page, setPage] = useState(1);
+
+  const planets = usePlanets({ page });
 
   return (
     <section className="mt-10">

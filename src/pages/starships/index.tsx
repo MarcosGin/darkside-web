@@ -1,11 +1,14 @@
 import { match } from "ts-pattern";
+import { useState } from "react";
 
 import { StarshipCard } from "@/components/cards/starship-card";
 import { useStarships } from "@/hooks/useStarships";
 import { Loader } from "@/components/ui/loader";
 
 export default function Starships() {
-  const starships = useStarships();
+  const [page, setPage] = useState(1);
+
+  const starships = useStarships({ page });
 
   return (
     <section className="mt-10">

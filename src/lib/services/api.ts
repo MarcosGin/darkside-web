@@ -1,6 +1,7 @@
 import {
   Film,
   FilmPopulated,
+  PaginationResponse,
   People,
   PeoplePopulated,
   Planet,
@@ -14,8 +15,10 @@ export const ClientApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
-export const getFilms = async () => {
-  return ClientApi.get<Film[]>("/films").then((response) => response.data);
+export const getFilms = async (page: number) => {
+  return ClientApi.get<PaginationResponse<Film>>("/films", {
+    params: { page },
+  }).then((response) => response.data);
 };
 
 export const getFilmById = async (id: string) => {
@@ -24,8 +27,10 @@ export const getFilmById = async (id: string) => {
   }).then((response) => response.data);
 };
 
-export const getPeople = async () => {
-  return ClientApi.get<People[]>("/people").then((response) => response.data);
+export const getPeople = async (page: number) => {
+  return ClientApi.get<PaginationResponse<People>>("/people", {
+    params: { page },
+  }).then((response) => response.data);
 };
 
 export const getPeopleById = async (id: string) => {
@@ -34,8 +39,10 @@ export const getPeopleById = async (id: string) => {
   }).then((response) => response.data);
 };
 
-export const getPlanets = async () => {
-  return ClientApi.get<Planet[]>("/planets").then((response) => response.data);
+export const getPlanets = async (page: number) => {
+  return ClientApi.get<PaginationResponse<Planet>>("/planets", {
+    params: { page },
+  }).then((response) => response.data);
 };
 
 export const getPlanetById = async (id: string) => {
@@ -44,10 +51,10 @@ export const getPlanetById = async (id: string) => {
   }).then((response) => response.data);
 };
 
-export const getStarships = async () => {
-  return ClientApi.get<Starship[]>("/starships").then(
-    (response) => response.data,
-  );
+export const getStarships = async (page: number) => {
+  return ClientApi.get<PaginationResponse<Starship>>("/starships", {
+    params: { page },
+  }).then((response) => response.data);
 };
 
 export const getStarshipById = async (id: string) => {

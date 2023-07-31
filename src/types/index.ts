@@ -71,3 +71,11 @@ export type StarshipPopulated = Starship & {
   pilots: People[];
   films: Film[];
 };
+
+
+export type PaginationResponse<T> = {
+  data: T[];
+  totalPages: number;
+  limit: number;
+  total: number;
+};

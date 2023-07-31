@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { getStarships } from "@/lib/services/api";
-import { Starship } from "@/types";
+import { PaginationResponse, Starship } from "@/types";
 
-export function useStarships() {
-  const { data, status } = useQuery<Starship[]>(
-    ["starships", {}],
-    () => getStarships(),
+export function useStarships({ page }: { page: number }) {
+  const { data, status } = useQuery<PaginationResponse<Starship>>(
+    ["starships", { page }],
+    () => getStarships(page),
     {
       retry: false,
       refetchOnWindowFocus: false,
@@ -15,7 +15,7 @@ export function useStarships() {
   );
 
   return {
-    data,
+    ...(data ?? {}),
     status,
   };
 }

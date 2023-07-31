@@ -35,7 +35,7 @@ export const PlanetCard: React.FC<PlanetCardProps> = ({
       </CardContent>
       <CardFooter>
         <Button asChild className="w-full">
-          <Link href={`/planet/${id}`}>View</Link>
+          <Link href={`/planets/${id}`}>View</Link>
         </Button>
       </CardFooter>
     </Card>
