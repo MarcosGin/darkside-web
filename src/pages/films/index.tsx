@@ -10,6 +10,7 @@ export default function Films() {
   const [currentPage, setCurrentPage] = useState(1);
   const films = useFilms({ page: currentPage });
 
+
   return (
     <section className="mt-10">
       <h2 className="mb-4 text-2xl font-semibold tracking-tight">Films</h2>
